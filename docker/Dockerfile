@@ -19,7 +19,8 @@ RUN apt update && apt install -y less \
   iproute2 \
   dnsutils \
   aggregate \
-  jq
+  jq \
+  default-jre
 
 # Ensure default node user has access to /usr/local/share
 RUN mkdir -p /usr/local/share/npm-global && \
@@ -38,7 +39,10 @@ ENV DEVCONTAINER=true
 
 # Create workspace and config directories and set permissions
 RUN mkdir -p /workspace /home/node/.claude && \
-  chown -R node:node /workspace /home/node/.claude
+  chown -R node:node /workspace /home/node/.claude && \
+  echo '{"apiKeyHelper":"~/.claude/anthropic_key.sh"}' > /home/node/.claude/settings.json && \
+  echo "echo \$ANTHROPIC_API_KEY" > /home/node/.claude/anthropic_key.sh && \
+  chmod +x /home/node/.claude/anthropic_key.sh
 
 WORKDIR /workspace
 

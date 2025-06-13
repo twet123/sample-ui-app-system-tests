@@ -30,3 +30,9 @@ tasks.register("executeTests", Test) {
         suites "src/test/resources/test-suite.xml"
     }
 }
+
+tasks.withType(Test) {
+    testLogging {
+        showStandardStreams = true
+    }
+}

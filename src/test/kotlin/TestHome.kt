@@ -1,5 +1,7 @@
+import com.codeborne.selenide.Configuration
 import com.codeborne.selenide.Selenide
 import org.testng.annotations.BeforeMethod
+import org.testng.annotations.BeforeTest
 import org.testng.annotations.Listeners
 import org.testng.annotations.Test
 import ticket.TicketStatus
@@ -12,6 +14,11 @@ class TestHome {
     private object Consts {
         const val ticketTitle = "Test ticket"
         const val ticketDescription = "Test ticket description"
+    }
+
+    @BeforeTest
+    fun setConfiguration() {
+        Configuration.headless = true
     }
 
     @BeforeMethod

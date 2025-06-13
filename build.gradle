@@ -1,0 +1,32 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '2.1.20'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+
+    implementation 'com.codeborne:selenide:7.9.3'
+    implementation 'com.codeborne:selenide-testng:7.9.3'
+    implementation 'org.testng:testng:7.11.0'
+    testRuntimeOnly 'org.slf4j:slf4j-simple:2.0.16'
+}
+
+test {
+    useJUnitPlatform()
+}
+kotlin {
+    jvmToolchain(21)
+}
+
+tasks.register("executeTests", Test) {
+    useTestNG() {
+        suites "src/test/resources/test-suite.xml"
+    }
+}

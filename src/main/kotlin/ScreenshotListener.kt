@@ -14,6 +14,6 @@ class ScreenshotListener : ITestListener {
 
     private fun saveScreenshot(name: String) {
         val filePath = Selenide.screenshot(name)?.substringAfter("file:")
-        println("##teamcity[publishArtifacts '${filePath}']")
+        println("##teamcity[publishArtifacts '${filePath?.replace(".png", ".html")}']")
     }
 }

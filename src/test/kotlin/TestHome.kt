@@ -1,8 +1,10 @@
 import com.codeborne.selenide.Selenide
 import org.testng.annotations.BeforeMethod
+import org.testng.annotations.Listeners
 import org.testng.annotations.Test
 import ticket.TicketStatus
 
+@Listeners(ScreenshotListener::class)
 class TestHome {
 
     private lateinit var homePage: HomePage

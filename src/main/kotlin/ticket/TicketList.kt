@@ -7,7 +7,7 @@ class TicketList {
 
     private val root = `$`("ul.tickets, p")
 
-    private val items = root.findAll("li.ticket-item")
+    private val items = root.findAll("li")
     private val tickets = items.map { Ticket(it) }
 
     fun getTicket(title: String): Ticket {

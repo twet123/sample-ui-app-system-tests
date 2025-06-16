@@ -147,10 +147,10 @@ fun main(args: Array<String>) {
 
     val prompt = generatePrompts(buildId, buildTypeId, authToken, testOccurrences)
         .first()
+        .replace("|", "||")
         .replace("'", "|'")
         .replace("\n", "|n")
         .replace("\r", "|r")
-        .replace("|", "||")
         .replace("[", "|[")
         .replace("]", "|]")
     println("##teamcity[setParameter name='CLAUDE_PROMPT' value='$prompt']")

@@ -1,0 +1,34 @@
+<meta-runner name="AI Agent Fix Test">
+    <description>A build step that should fix the failing system tests</description>
+    <settings>
+        <parameters>
+            <param name="ANTHROPIC_API_KEY" value=""/>
+            <param name="GH_TOKEN" value=""/>
+            <param name="TC_TOKEN" value=""/>
+        </parameters>
+        <build-runners>
+            <runner name="Generate Prompt" type="kotlinScript">
+                <parameters>
+                    <param name="kotlinArgs" value="%TC_TOKEN% %system.teamcity.buildType.id% %teamcity.build.id%"/>
+                    <param name="kotlinPath" value="%teamcity.tool.kotlin.compiler.DEFAULT%"/>
+                    <param name="scriptFile" value="scripts/generate-prompt.main.kts"/>
+                    <param name="scriptType" value="file"/>
+                    <param name="teamcity.step.mode" value="default"/>
+                </parameters>
+            </runner>
+            <runner name="Check and Fix Tests" type="AiAgentsTestMaintenance_ClaudeCode">
+                <parameters>
+                    <param name="ANTHROPIC_API_KEY" value="%ANTHROPIC_API_KEY%"/>
+                    <param name="CLAUDE_PROMPT" value="%CLAUDE_PROMPT%"/>
+                    <param name="GH_TOKEN" value="%GH_TOKEN%"/>
+                    <param name="plugin.docker.imageId" value=""/>
+                    <param name="plugin.docker.imagePlatform" value=""/>
+                    <param name="plugin.docker.run.parameters" value=""/>
+                    <param name="teamcity.step.mode" value="default"/>
+                    <param name="teamcity.step.phase" value=""/>
+                </parameters>
+            </runner>
+        </build-runners>
+        <requirements/>
+    </settings>
+</meta-runner>

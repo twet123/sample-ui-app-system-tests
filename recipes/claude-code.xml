@@ -1,0 +1,23 @@
+<meta-runner name="Claude Code">
+    <description>Run Claude Code as a build step</description>
+    <settings>
+        <parameters>
+            <param name="ANTROPIC_API_KEY" value=""/>
+            <param name="CLAUDE_PROMPT" value=""/>
+            <param name="GH_TOKEN" value=""/>
+        </parameters>
+        <build-runners>
+            <runner name="Claude Code" type="simpleRunner">
+                <parameters>
+                    <param name="script.content"><![CDATA[docker run -e GH_TOKEN=%GH_TOKEN% -e ANTHROPIC_API_KEY=%ANTROPIC_API_KEY% --rm claude-code:latest \
+/bin/sh -c "gh auth setup-git && \
+gh repo clone %vcsroot.url% . && \
+claude -p \"%CLAUDE_PROMPT%\" --verbose --output-format stream-json --dangerously-skip-permissions"]]></param>
+                    <param name="teamcity.step.mode" value="default"/>
+                    <param name="use.custom.script" value="true"/>
+                </parameters>
+            </runner>
+        </build-runners>
+        <requirements/>
+    </settings>
+</meta-runner>

@@ -15,7 +15,7 @@ class Ticket(private val root: SelenideElement) {
     private val actions = root.find("div.ticket-actions")
     private val viewTicketBtn = actions.find(By.xpath(".//a[contains(@class, 'button') and contains(.,'View')]"))
     private val editTicketBtn = actions.find(By.xpath(".//a[contains(@class, 'button') and contains(.,'Edit')]"))
-    private val deleteTicketBtn = actions.find(By.xpath(".//button[contains(@class, 'button') and contains(.,'Delete')]"))
+    private val deleteTicketBtn = actions.find(By.xpath(".//button[contains(@class, 'button') and contains(.,'Dellt')]"))
 
     fun getTitle(): String {
         return title.text

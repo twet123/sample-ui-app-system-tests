@@ -144,7 +144,16 @@ fun main(args: Array<String>) {
     val buildId = args[2]
 
     val testOccurrences = fetchTestOccurrences(buildId, authToken)
-    println(generatePrompts(buildId, buildTypeId, authToken, testOccurrences))
+
+    val prompt = generatePrompts(buildId, buildTypeId, authToken, testOccurrences)
+        .first()
+        .replace("'", "|'")
+        .replace("\n", "|n")
+        .replace("\r", "|r")
+        .replace("|", "||")
+        .replace("[", "|[")
+        .replace("]", "|]")
+    println("##teamcity[setParameter name='CLAUDE_PROMPT' value='$prompt']")
 }
 
 main(args)

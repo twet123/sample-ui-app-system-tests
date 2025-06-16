@@ -147,6 +147,7 @@ fun main(args: Array<String>) {
 
     val prompt = generatePrompts(buildId, buildTypeId, authToken, testOccurrences)
         .first()
+        .replace("\"", "'")
         .replace("|", "||")
         .replace("'", "|'")
         .replace("\n", "|n")
